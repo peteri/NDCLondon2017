@@ -1,6 +1,7 @@
 ﻿#
 # Renames a file to a backup file
 #
+[CmdLetBinding()]
 Param (
 [Parameter(Mandatory=$true)]
 [String] $Path
@@ -11,7 +12,7 @@ function invoke-Rename ($path)
 	try
 	{
 		$newPath=$path +".bak"
-		Rename-Item -Path $Path -NewName $newName
+		Rename-Item -Path $Path -NewName $newPath
 	}
 	catch
 	{
