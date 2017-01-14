@@ -29,6 +29,7 @@
   <ItemGroup />
   <ItemGroup>
     <Compile Include="rename.ps1" />
+    <Compile Include="rename.tests.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build" />
