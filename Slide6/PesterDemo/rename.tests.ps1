@@ -20,4 +20,12 @@ Describe "Rename" {
 			"$filename" | should not exist
 		}
 	}
+	Context "Rename Item has error" {
+		$filename= 'c:\temp\test.txt'
+		Mock Rename-Item { throw "Bad thing"}
+		It "Runs" {
+			.\Rename.ps1 -Path $filename | Should belike 'Failed *'
+			Assert-MockCalled Rename-Item -ParameterFilter {$path -eq $filename -and $newName -eq 'test.txt.bak'}
+		}
+	}
 }
