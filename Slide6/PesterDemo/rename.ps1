@@ -20,7 +20,7 @@ function invoke-Rename ($path)
 	catch
 	{
 		Write-Verbose "Error was $_"
-		$failed=$true
+		$script:failed=$true
 	}
 }
 

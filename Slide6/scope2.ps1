@@ -4,7 +4,7 @@ function Test
     $a=$magicNumber *3
     Write-Host "3 times $magicNumber is $a"
 
-    $magicNumber= 11
+    $script:magicNumber= 11
 
     $a=$magicNumber *3
     Write-Host "3 times $magicNumber is $a"
