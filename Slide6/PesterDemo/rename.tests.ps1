@@ -11,4 +11,13 @@ Describe "Rename" {
 			Assert-MockCalled Rename-Item -ParameterFilter {$path -eq $filename -and $newName -eq 'c:\temp\test.txt.bak'}
 		}
 	}
+	Context "Rename Integration" {
+		$filename= 'TestDrive:\test.txt'
+		New-item -Path $filename -Type File
+		It "Runs" {
+			.\Rename.ps1 -Path $filename
+			"$filename.bak" | should exist
+			"$filename" | should not exist
+		}
+	}
 }
