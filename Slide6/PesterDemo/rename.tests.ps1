@@ -15,7 +15,7 @@ Describe "Rename" {
 		$filename= 'TestDrive:\test.txt'
 		New-item -Path $filename -Type File
 		It "Runs" {
-			.\Rename.ps1 -Path $filename
+			.\Rename.ps1 -Path $filename -Verbose
 			"$filename.bak" | should exist
 			"$filename" | should not exist
 		}

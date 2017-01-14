@@ -12,10 +12,13 @@ function invoke-Rename ($path)
 	try
 	{
 		$newPath=$path +".bak"
+		Write-Verbose "renaming $path to $newPath"
 		Rename-Item -Path $Path -NewName $newPath
+		Write-Verbose "Rename done"
 	}
 	catch
 	{
+		Write-Verbose "Error was $_"
 		$failed=$true
 	}
 }
