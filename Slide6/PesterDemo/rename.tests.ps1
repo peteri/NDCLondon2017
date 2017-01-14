@@ -1,4 +1,8 @@
-﻿Describe "Rename" {
+﻿$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+Set-Location $Here
+
+Write-Host "Current Directory is $(Get-Location)"
+Describe "Rename" {
 	Context "Rename Item is called" {
 		$filename= 'c:\temp\test.txt'
 		Mock Rename-Item  {}
