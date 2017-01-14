@@ -12,8 +12,9 @@ function invoke-Rename ($path)
 	try
 	{
 		$newPath=$path +".bak"
-		Write-Verbose "renaming $path to $newPath"
-		Rename-Item -Path $Path -NewName $newPath
+		$newName=Split-Path $newPath -Leaf
+		Write-Verbose "renaming $path to $newName"
+		Rename-Item -Path $Path -NewName $newName
 		Write-Verbose "Rename done"
 	}
 	catch
