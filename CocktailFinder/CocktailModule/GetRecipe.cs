@@ -12,22 +12,30 @@ namespace CocktailModule
     [Cmdlet(VerbsCommon.Get, "Recipe")]
     public class GetRecipe : PSCmdlet
     {
+        private Dictionary<string, Ingredient> ingredients = null;
+        private Dictionary<string, Recipe> recipes = null;
+
         [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Ingredients",
             ValueFromPipeline = true)]
         [ValidateNotNullOrEmpty]
         public Ingredient[] Ingredients { get; set; }
 
         [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Default",
-            ValueFromPipeline = true,ValueFromPipelineByPropertyName = true)]
-        public string[] Names { get; set; }
+            ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
+        public string[] Name { get; set; }
+
+        protected override void BeginProcessing()
+        {
+            base.BeginProcessing();
+            ingredients = IngredientsReader.Read();
+            recipes = RecipesReader.Read(ingredients);
+        }
 
         protected override void ProcessRecord()
         {
-            var ingredients = IngredientsReader.Read();
-            var recipes = RecipesReader.Read(ingredients);
-            if (Names != null)
+            if (Name != null)
             {
-                foreach (var name in Names)
+                foreach (var name in Name)
                 {
                     WriteObject(recipes[name]);
                 }
