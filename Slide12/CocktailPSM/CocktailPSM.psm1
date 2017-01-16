@@ -51,3 +51,8 @@ function Get-Recipe
     end {}
 }
 
+Export-ModuleMember -Function Get-ByIngredient						
+Export-ModuleMember -Function Get-Recipe
+Export-ModuleMember -Function Write-Recipe
+Export-ModuleMember -Variable cocktailportNumber
+Export-ModuleMember -Variable cocktailServerName
