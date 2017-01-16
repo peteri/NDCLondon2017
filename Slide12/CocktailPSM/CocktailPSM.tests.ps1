@@ -5,7 +5,7 @@ Describe "Get-ByIngredients" {
 	Context "Function Exists" {
 		It "Should Return" {
 			$ingredients=@("Gin","Vermouth - Sweet Red","Campari")
-			Get-ByIngredient $ingredients | Should Be ('Negroni','Americano','Hello')
+			,$(Get-ByIngredient $ingredients) | Should MatchArrayUnordered ('Negroni','Americano','Hello')
 		}
 	}
 }
