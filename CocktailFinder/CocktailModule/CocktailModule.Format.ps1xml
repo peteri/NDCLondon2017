@@ -60,7 +60,7 @@
               </ListItem>
               <ListItem>
                 <Label>Ingredients</Label>
-                <ScriptBlock>$_.Ingredients</ScriptBlock>
+                <ScriptBlock>$_.Ingredients | Format-Table | Out-String</ScriptBlock>
               </ListItem>
               <ListItem>
                 <PropertyName>Garnish</PropertyName>
