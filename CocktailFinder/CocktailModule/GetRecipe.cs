@@ -15,22 +15,27 @@ namespace CocktailModule
         private Dictionary<string, Ingredient> ingredients = null;
         private Dictionary<string, Recipe> recipes = null;
 
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Ingredients",
-            ValueFromPipeline = true)]
+        // Ingredient parameter
+        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Ingredients", ValueFromPipeline = true)]
         [ValidateNotNullOrEmpty]
-        public Ingredient[] Ingredients { get; set; }
+        public Ingredient[] Ingredient { get; set; }
 
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Default",
-            ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
+        // Name parameter
+        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Default", ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
         public string[] Name { get; set; }
 
+        /// <summary>
+        /// Begin the process
+        /// </summary>
         protected override void BeginProcessing()
         {
-            base.BeginProcessing();
             ingredients = IngredientsReader.Read();
             recipes = RecipesReader.Read(ingredients);
         }
 
+        /// <summary>
+        /// Process a record
+        /// </summary>
         protected override void ProcessRecord()
         {
             if (Name != null)
@@ -42,7 +47,7 @@ namespace CocktailModule
             }
             else
             {
-                var inStock = Ingredients.ToList();
+                var inStock = Ingredient.ToList();
                 var finder = new RecipeFinder(recipes);
                 var canMake = finder.GetByAvailableIngredients(inStock);
                 foreach (var name in canMake)
@@ -50,6 +55,13 @@ namespace CocktailModule
                     WriteObject(recipes[name]);
                 }
             }
+        }
+
+        /// <summary>
+        /// End the process
+        /// </summary>
+        protected override void EndProcessing()
+        {
         }
     }
 }
