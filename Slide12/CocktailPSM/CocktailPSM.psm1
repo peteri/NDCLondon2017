@@ -1,6 +1,22 @@
 [string]$cocktailServerName = 'localhost'
 [int]$cocktailportNumber = '30000'
 
+<#
+.Synopsis
+   Retrieves a list of IBA cocktails that can be made from a list of ingredients
+.DESCRIPTION
+   Uses a web service
+.EXAMPLE
+   Get-ByIngredient @('Gin','Vermout - Sweet Red','Campari')
+.INPUTS
+   Does not support the pipeline
+.OUTPUTS
+   Names of cocktails that can be made
+.NOTES
+   Uses module level variables cocktailServerName and cocktailportNumber to specify the server to use.
+.COMPONENT
+   CocktailFinder
+#>
 function Get-ByIngredient
 {
 	param(

@@ -12,7 +12,7 @@ Export-ModuleMember -Variable cocktailServerName
 
 #Test
 
-			,$(Get-ByIngredient $ingredients) | Should MatchArrayUnordered @('Negroni','Americano')
+,$(Get-ByIngredient $ingredients) | Should MatchArrayUnordered @('Negroni','Americano')
 
 
 #
