@@ -16,9 +16,9 @@ namespace CocktailModule
         private Dictionary<string, Recipe> recipes = null;
 
         // Ingredient parameter
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Ingredients", ValueFromPipeline = true)]
+        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "InputObject", ValueFromPipeline = true)]
         [ValidateNotNullOrEmpty]
-        public Ingredient[] Ingredient { get; set; }
+        public Ingredient[] InputObject { get; set; }
 
         // Name parameter
         [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Default", ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
@@ -47,7 +47,7 @@ namespace CocktailModule
             }
             else
             {
-                var inStock = Ingredient.ToList();
+                var inStock = InputObject.ToList();
                 var finder = new RecipeFinder(recipes);
                 var canMake = finder.GetByAvailableIngredients(inStock);
                 foreach (var name in canMake)
