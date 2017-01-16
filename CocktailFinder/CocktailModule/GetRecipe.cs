@@ -14,10 +14,11 @@ namespace CocktailModule
     {
         [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Ingredients",
             ValueFromPipeline = true)]
+        [ValidateNotNullOrEmpty]
         public Ingredient[] Ingredients { get; set; }
 
-        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Recipes",
-            ValueFromPipeline = true)]
+        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Default",
+            ValueFromPipeline = true,ValueFromPipelineByPropertyName = true)]
         public string[] Names { get; set; }
 
         protected override void ProcessRecord()
