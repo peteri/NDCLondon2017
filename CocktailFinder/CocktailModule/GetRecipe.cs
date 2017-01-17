@@ -14,6 +14,7 @@ namespace CocktailModule
     {
         private Dictionary<string, Ingredient> ingredients = null;
         private Dictionary<string, Recipe> recipes = null;
+        private List<Ingredient> inStock = null;
 
         // Ingredient parameter
         [Parameter(Position = 0, Mandatory = true, ParameterSetName = "InputObject", ValueFromPipeline = true)]
@@ -31,6 +32,7 @@ namespace CocktailModule
         {
             ingredients = IngredientsReader.Read();
             recipes = RecipesReader.Read(ingredients);
+            inStock = new List<Ingredient>();
         }
 
         /// <summary>
@@ -47,12 +49,9 @@ namespace CocktailModule
             }
             else
             {
-                var inStock = InputObject.ToList();
-                var finder = new RecipeFinder(recipes);
-                var canMake = finder.GetByAvailableIngredients(inStock);
-                foreach (var name in canMake)
+                foreach(var ingredient in InputObject)
                 {
-                    WriteObject(recipes[name]);
+                    inStock.Add(ingredient);
                 }
             }
         }
@@ -62,6 +61,15 @@ namespace CocktailModule
         /// </summary>
         protected override void EndProcessing()
         {
+            if ((inStock != null) && (inStock.Count !=0))
+            {
+                var finder = new RecipeFinder(recipes);
+                var canMake = finder.GetByAvailableIngredients(inStock);
+                foreach (var name in canMake)
+                {
+                    WriteObject(recipes[name]);
+                }
+            }
         }
     }
 }

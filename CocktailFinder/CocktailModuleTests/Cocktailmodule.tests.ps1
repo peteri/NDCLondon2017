@@ -60,11 +60,11 @@ Describe "Cocktail Ingredients Test" {
 			,($recipes | Select -ExpandProperty Name) | Should MatchArrayUnordered ('Negroni','Americano')
 		}
 	}
-	#Context "Using pipeline" {
-	#	It "Runs Get-Recipe returning two recipes" {
-	#		$recipes = $inStock | Get-Recipe 
-	#		$recipes.Count | Should Be 2
-	#		,($recipes | Select -ExpandProperty Name) | Should MatchArrayUnordered ('Negroni','Americano')
-	#	}
-	#}
+	Context "Using pipeline" {
+		It "Runs Get-Recipe returning two recipes" {
+			$recipes = $inStock | Get-Recipe 
+			$recipes.Count | Should Be 2
+			,($recipes | Select -ExpandProperty Name) | Should MatchArrayUnordered ('Negroni','Americano')
+		}
+	}
 }
